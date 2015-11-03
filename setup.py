@@ -2,21 +2,12 @@
 # These variables are overwritten by Zenoss when the ZenPack is exported
 # or saved.  Do not modify them directly here.
 # NB: PACKAGES is deprecated
-<<<<<<< HEAD
 NAME = "ZenPacks.community.HuaweiWireless"
 VERSION = "0.0.1"
 AUTHOR = "Nick Muir"
 LICENSE = "LGPL"
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
 PACKAGES = ['ZenPacks', 'ZenPacks.community', 'ZenPacks.community.HuaweiWireless']
-=======
-NAME = "ZenPacks.community.PanduitMonitoring"
-VERSION = "0.0.3"
-AUTHOR = "Nick Muir"
-LICENSE = "LGPL"
-NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
-PACKAGES = ['ZenPacks', 'ZenPacks.community', 'ZenPacks.community.PanduitMonitoring']
->>>>>>> 37c2815fdc2832f1dc015e32c22ad9a825d47d53
 INSTALL_REQUIRES = []
 COMPAT_ZENOSS_VERS = ""
 PREV_ZENPACK_NAME = ""
