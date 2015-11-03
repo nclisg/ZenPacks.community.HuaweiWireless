@@ -1,1 +1,1 @@
-# ZenPacks.community.HuaweiWireless
+Zenpack that montiors Huawei Enteprise Wireless controllers
