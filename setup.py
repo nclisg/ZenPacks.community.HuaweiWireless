@@ -1,7 +1,7 @@
 ################################
 # These variables are overwritten by Zenoss when the ZenPack is exported
 # or saved.  Do not modify them directly here.
-# NB: PACKAGES is deprecated
+# NB: PACKAGES is deprecated 
 NAME = "ZenPacks.community.HuaweiWireless"
 VERSION = "0.0.1"
 AUTHOR = "Nick Muir"
