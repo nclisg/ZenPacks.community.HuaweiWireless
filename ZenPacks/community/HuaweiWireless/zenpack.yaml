@@ -45,6 +45,15 @@ classes:
         label: Neigbout Port
         order: 10
         label_width: 120
+  HuaweiAPRegion:
+    base: [zenpacklib.Component]
+    label: AP Region
+    properties:
+      regiondeploymode:
+        label: Deploy Mode
+      regionapnumber:
+        label:  APs
+
 device_classes:
   /Network/Wireless/Access Controller/Huawei:
     zProperties:
@@ -56,6 +65,10 @@ device_classes:
         - zenoss.snmp.RouteMap
         - zenoss.snmp.SnmpV3EngineIdMap
         - community.snmp.HuaweiAccessPointMap
-
+        - community.snmp.HuaweiAPRegionMap
+      zDeviceTemplates:
+        - Device
+        - HuaweiWirelessController
 class_relationships:
   - HuaweiControllerDevice 1:MC HuaweiAccessPoint
+  - HuaweiControllerDevice 1:MC HuaweiAPRegion
