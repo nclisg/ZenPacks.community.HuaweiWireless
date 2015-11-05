@@ -64,8 +64,7 @@ device_classes:
         - zenoss.snmp.InterfaceMap
         - zenoss.snmp.RouteMap
         - zenoss.snmp.SnmpV3EngineIdMap
-        - community.snmp.HuaweiAccessPointMap
-        - community.snmp.HuaweiAPRegionMap
+        - community.snmp.HuaweiAccessControllerMap
       zDeviceTemplates:
         - Device
         - HuaweiWirelessController
