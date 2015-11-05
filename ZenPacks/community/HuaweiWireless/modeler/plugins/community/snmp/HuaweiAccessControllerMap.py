@@ -1,5 +1,5 @@
-from Products.DataCollector.plugins.CollectorPlugin import (SnmpPlugin, GetTableMap) 
-from Products.DataCollector.plugins.DataMaps import ObjectMap, RelationshipMap
+from Products.DataCollector.plugins.CollectorPlugin import (SnmpPlugin, GetTableMap, GetMap) 
+from Products.DataCollector.plugins.DataMaps import ObjectMap, RelationshipMap, MultiArgs
 
 statusname = { 1 : 'idle', 2 : 'autofind', 3 : 'typeNotMatch', 4 : 'fault', 5 : 'config', 6 : 'configFailed', 7 : 'download', 8  : 'normal', 9: 'commiting', 10 : 'commitFailed', 11 : 'standby', 12: 'vermismatch' }
 
@@ -10,31 +10,36 @@ class HuaweiAccessControllerMap(SnmpPlugin):
     snmpGetTableMaps = (
         GetTableMap( 
             'hwApRegionTable', '1.3.6.1.4.1.2011.6.139.2.5.1.1', { 
-                '.2': 'hwApRegionName', 
-                '.3': 'hwApRegionDeployMode', 
-                '.4': 'hwApRegionApNumber', 
+                '.2':'hwApRegionName', 
+                '.3':'hwApRegionDeployMode', 
+                '.4':'hwApRegionApNumber', 
                 } 
             ),  
         GetTableMap( 
             'hwApObjectsTable', '1.3.6.1.4.1.2011.6.139.2.6.1.1', { 
-                '.2': 'hwApUsedType', 
-                '.4': 'hwApUsedRegionIndex', 
-                '.5': 'hwApMac', 
-                '.6': 'hwApSn', 
-                '.7': 'hwApSysName', 
-                '.8': 'hwApRunState', 
-                '.9': 'hwApSoftwareVersion', 
-                '.15': 'hwApIpAddress', 
-                '.20': 'hwApRunTime', 
+                '.2':'hwApUsedType', 
+                '.4':'hwApUsedRegionIndex', 
+                '.5':'hwApMac', 
+                '.6':'hwApSn', 
+                '.7':'hwApSysName', 
+                '.8':'hwApRunState', 
+                '.9':'hwApSoftwareVersion', 
+                '.15':'hwApIpAddress', 
+                '.20':'hwApRunTime', 
             } 
         ),
         GetTableMap(
             'hwApLldpTable', '1.3.6.1.4.1.2011.6.139.2.6.14.1', {
-                '.6': 'hwApLldpRemPortId',
-                '.8': 'hwApLldpRemSysName',
+                '.6':'hwApLldpRemPortId',
+                '.8':'hwApLldpRemSysName',
             }
         )
     )
+
+    snmpGetMap = GetMap({
+            '.1.3.6.1.2.1.47.1.1.1.1.11.9':'entPhysicalSerialNum',
+            '.1.3.6.1.2.1.47.1.1.1.1.10.3':'entPhysicalSoftwareRev',
+        })
 
     def process(self, device, results, log): 
 
@@ -44,10 +49,11 @@ class HuaweiAccessControllerMap(SnmpPlugin):
         apmap = []
 	regionmap = []
 
-
-        acc_points = results[1].get('hwApObjectsTable', {}) 
-        lldp = results[1].get('hwApLldpTable', {}) 
-        regions = results[1].get('hwApRegionTable', {})
+        getdata, tabledata = results;
+  
+        acc_points = tabledata.get('hwApObjectsTable', {}) 
+        lldp = tabledata.get('hwApLldpTable', {}) 
+        regions = tabledata.get('hwApRegionTable', {})
       
         #  AP Region Component
         for snmpindex, row in regions.items(): 
@@ -100,6 +106,13 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 'apneighbourname' : neighbour,
                 'apneighbourport' : neighport,
                 })) 
+
+        maps.append(ObjectMap(
+            modname = 'ZenPacks.community.HuaweiWireless.HuaweiControllerDevice',
+            data = {
+                'setHWSerialNumber': getdata.get('entPhysicalSerialNum'),
+                'setOSProductKey': MultiArgs(getdata.get('entPhysicalSoftwareRev'), 'HUAWEI Technology Co.,Ltd'),
+            }))
 
         maps.append(RelationshipMap(
             relname = 'huaweiAPRegions',

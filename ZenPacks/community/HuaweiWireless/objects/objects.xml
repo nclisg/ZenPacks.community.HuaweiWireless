@@ -747,4 +747,76 @@ AVERAGE
 </object>
 </tomanycont>
 </object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6005') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6005' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+ac6005
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.4', '']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6005-pwr') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6005-pwr' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+ac6005-pwr
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.5', '']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6605') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6605' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+ac6605
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.6']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6605-ac') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6605-ac' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+ac6605-ac
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.3']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6605-lsw') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6605-lsw' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+ac6605-lsw
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.2']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'acu') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/acu' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+acu
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.1']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
 </objects>
