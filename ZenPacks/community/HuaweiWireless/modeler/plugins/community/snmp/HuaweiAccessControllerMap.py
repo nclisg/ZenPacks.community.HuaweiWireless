@@ -1,11 +1,32 @@
 from Products.DataCollector.plugins.CollectorPlugin import (SnmpPlugin, GetTableMap, GetMap) 
 from Products.DataCollector.plugins.DataMaps import ObjectMap, RelationshipMap, MultiArgs
 
-statusname = { 1 : 'idle', 2 : 'autofind', 3 : 'typeNotMatch', 4 : 'fault', 5 : 'config', 6 : 'configFailed', 7 : 'download', 8  : 'normal', 9: 'commiting', 10 : 'commitFailed', 11 : 'standby', 12: 'vermismatch' }
+#Lookup table for AP Status
+statusname = {
+    1 : 'idle',
+    2 : 'autofind',
+    3 : 'typeNotMatch',
+    4 : 'fault',
+    5 : 'config', 
+    6 : 'configFailed', 
+    7 : 'download', 
+    8  : 'normal', 
+    9: 'commiting', 
+    10 : 'commitFailed', 
+    11 : 'standby', 
+    12: 'vermismatch'
+    }
 
-deploymodes = { 1 : 'Discrete', 2 : 'Normal', 3 : 'Dense' }
+#Lookup table for AP Region Deploy modes
+deploymodes = {
+    1 : 'Discrete',
+    2 : 'Normal',
+    3 : 'Dense'
+    }
 
 class HuaweiAccessControllerMap(SnmpPlugin): 
+
+#Pull SNMP data from controllers
 
     snmpGetTableMaps = (
         GetTableMap( 
@@ -108,6 +129,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 })) 
 
 
+        # Map main device details
         maps.append(ObjectMap(
             modname = 'ZenPacks.community.HuaweiWireless.HuaweiControllerDevice',
             data = {
@@ -116,14 +138,14 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 'controller_maxap': getdata.get('hwWlanAcAccessMaxApNumber'),
             }))
 
+        # Map AP Region components
         maps.append(RelationshipMap(
             relname = 'huaweiAPRegions',
             modname = 'ZenPacks.community.HuaweiWireless.HuaweiAPRegion',
             objmaps = regionmap))
 
-          
+        # Map AP compoenents and create relattionship to AP Regions
         for ap in apmap:
-            log.warn(ap.apregion)
             maps.append(RelationshipMap(
                 compname = 'huaweiAPRegions/%s' % ap.apregion,
                 relname = 'huaweiAccessPoints',
