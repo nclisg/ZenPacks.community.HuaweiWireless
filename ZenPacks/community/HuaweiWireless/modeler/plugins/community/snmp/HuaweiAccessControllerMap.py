@@ -92,7 +92,6 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 neighport = apneighbour.get('hwApLldpRemPortId'),
     
             regionrow = regions.get('.' + str(row.get('hwApUsedRegionIndex'))),       
-		
             apmap.append(ObjectMap({ 
                 'id': self.prepId(name), 
                 'title': name, 
@@ -121,10 +120,14 @@ class HuaweiAccessControllerMap(SnmpPlugin):
             relname = 'huaweiAPRegions',
             modname = 'ZenPacks.community.HuaweiWireless.HuaweiAPRegion',
             objmaps = regionmap))
+
           
-        maps.append(RelationshipMap(
-            relname = 'huaweiAccessPoints',
-            modname = 'ZenPacks.community.HuaweiWireless.HuaweiAccessPoint',
-            objmaps = apmap))
+        for ap in apmap:
+            log.warn(ap.apregion)
+            maps.append(RelationshipMap(
+                compname = 'huaweiAPRegions/%s' % ap.apregion,
+                relname = 'huaweiAccessPoints',
+                modname = 'ZenPacks.community.HuaweiWireless.HuaweiAccessPoint',
+                objmaps = apmap))
 
         return maps

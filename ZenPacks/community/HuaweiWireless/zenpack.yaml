@@ -34,10 +34,6 @@ classes:
         label: Status
         order: 5
         label_width: 100
-      apregion:
-        label: Region
-        order: 6
-        label_width: 100
       apsoftwareversion:
         label: Firmware
         order: 7
@@ -75,5 +71,5 @@ device_classes:
         - Device
         - HuaweiWirelessController
 class_relationships:
-  - HuaweiControllerDevice 1:MC HuaweiAccessPoint
   - HuaweiControllerDevice 1:MC HuaweiAPRegion
+  - HuaweiAPRegion 1:MC HuaweiAccessPoint
