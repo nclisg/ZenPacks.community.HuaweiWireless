@@ -63,6 +63,7 @@ device_classes:
   /Network/Wireless/Access Controller/Huawei:
     zProperties:
       zPythonClass: ZenPacks.community.HuaweiWireless.HuaweiControllerDevice
+      zLinks: '<a href="https://${here/id}" target="_">Management Interface</a>'
       zCollectorPlugins:
         - zenoss.snmp.NewDeviceMap
         - zenoss.snmp.DeviceMap

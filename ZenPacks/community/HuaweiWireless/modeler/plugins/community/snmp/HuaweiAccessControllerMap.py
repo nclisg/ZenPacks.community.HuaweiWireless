@@ -108,8 +108,6 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 'apneighbourport' : neighport,
                 })) 
 
-        log.info('Max AP %d', getdata.get('hwWlanAcAccessMaxApNumber'))
-
 
         maps.append(ObjectMap(
             modname = 'ZenPacks.community.HuaweiWireless.HuaweiControllerDevice',
