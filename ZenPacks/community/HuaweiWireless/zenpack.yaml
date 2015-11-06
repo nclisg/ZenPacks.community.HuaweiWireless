@@ -144,7 +144,7 @@ device_classes:
             oid: 1.3.6.1.4.1.2011.5.25.31.1.1.1.1.7.9
         graphs:
           CPU Utilization:
-            units: oercent
+            units: percent
             graphpoints:
               hwEntityCpuUsage:
                 dpName: hwEntityCpuUsage_hwEntityCpuUsage
