@@ -4,6 +4,11 @@ classes:
   HuaweiControllerDevice:
     base: [zenpacklib.Device]
     label:  Controller
+    properties:
+      controller_maxap:
+        type: int
+        label:  Max APs
+
   HuaweiAccessPoint:
     base: [zenpacklib.Component]
     label: Access Point

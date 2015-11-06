@@ -39,6 +39,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
     snmpGetMap = GetMap({
             '.1.3.6.1.2.1.47.1.1.1.1.11.9':'entPhysicalSerialNum',
             '.1.3.6.1.2.1.47.1.1.1.1.10.3':'entPhysicalSoftwareRev',
+            '.1.3.6.1.4.1.2011.6.139.1.2.5.0':'hwWlanAcAccessMaxApNumber',
         })
 
     def process(self, device, results, log): 
@@ -107,11 +108,15 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 'apneighbourport' : neighport,
                 })) 
 
+        log.info('Max AP %d', getdata.get('hwWlanAcAccessMaxApNumber'))
+
+
         maps.append(ObjectMap(
             modname = 'ZenPacks.community.HuaweiWireless.HuaweiControllerDevice',
             data = {
                 'setHWSerialNumber': getdata.get('entPhysicalSerialNum'),
                 'setOSProductKey': MultiArgs(getdata.get('entPhysicalSoftwareRev'), 'HUAWEI Technology Co.,Ltd'),
+                'controller_maxap': getdata.get('hwWlanAcAccessMaxApNumber'),
             }))
 
         maps.append(RelationshipMap(

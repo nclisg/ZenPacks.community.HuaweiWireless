@@ -819,4 +819,16 @@ acu
 False
 </property>
 </object>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'acu2') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/acu2' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<property type="string" id="name" mode="w" >
+acu2
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['.1.3.6.1.4.1.2011.2.240.7']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+False
+</property>
+</object>
 </objects>
