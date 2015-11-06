@@ -70,6 +70,106 @@ device_classes:
       zDeviceTemplates:
         - Device
         - HuaweiWirelessController
+
+    templates:
+      HuaweiAccessPoint:
+        description: Monitoring Metrics of Access Point components
+        targetPythonClass: Products.ZenModel.Device
+        datasources:
+          hwApCpuUseRate:
+            type: SNMP
+            datapoints:
+              hwApCpuUseRate: {}
+            oid: 1.3.6.1.4.1.2011.6.139.2.6.6.1.2
+          hwApMemoryUseRate:
+            type: SNMP
+            datapoints:
+              hwApMemoryUseRate: {}
+            oid: 1.3.6.1.4.1.2011.6.139.2.6.6.1.1
+          hwApOnlineUserNum:
+            type: SNMP
+            datapoints:
+              hwApOnlineUserNum: {}
+            oid: 1.3.6.1.4.1.2011.6.139.2.6.6.1.5
+        graphs:
+          CPU Utilization:
+            units: percent
+            graphpoints:
+              hwApCpuUseRate:
+                dpName: hwApCpuUseRate_hwApCpuUseRate
+                legend: CPU Utilization
+          Memory Utilization:
+            units: percent
+            graphpoints:
+              hwApMemoryUseRate:
+                dpName: hwApMemoryUseRate_hwApMemoryUseRate
+                legend: Memory Utilization
+          Online Users:
+            graphpoints:
+              hwApOnlineUserNum:
+                dpName: hwApOnlineUserNum_hwApOnlineUserNum
+                lineType: AREA
+                format: '%5.0lf'
+                legend: Online Users
+      HuaweiWirelessController:
+        description: Monitors metric of Wireless Controller
+        targetPythonClass: Products.ZenModel.Device
+        thresholds:
+          High CPU Utiliation:
+            dsnames: [hwEntityCpuUsage_hwEntityCpuUsage]
+            maxval: '90'
+          High Memory Utilization:
+            dsnames: [hwEntityMemUsage_hwEntityMemUsage]
+            maxval: '80'
+        datasources:
+          hwAcCurAuthSucessStaNum:
+            type: SNMP
+            datapoints:
+              hwAcCurAuthSucessStaNum: {}
+            oid: 1.3.6.1.4.1.2011.6.139.4.14.7.0
+          hwAcCurJointApNum:
+            type: SNMP
+            datapoints:
+              hwAcCurJointApNum: {}
+            oid: 1.3.6.1.4.1.2011.6.139.4.14.8.0
+          hwEntityCpuUsage:
+            type: SNMP
+            datapoints:
+              hwEntityCpuUsage: {}
+            oid: 1.3.6.1.4.1.2011.5.25.31.1.1.1.1.5.9
+          hwEntityMemUsage:
+            type: SNMP
+            datapoints:
+              hwEntityMemUsage: {}
+            oid: 1.3.6.1.4.1.2011.5.25.31.1.1.1.1.7.9
+        graphs:
+          CPU Utilization:
+            units: oercent
+            graphpoints:
+              hwEntityCpuUsage:
+                dpName: hwEntityCpuUsage_hwEntityCpuUsage
+                legend: CPU Utilization
+                includeThresholds: true
+          Connected APs:
+            graphpoints:
+              hwAcCurJointApNum:
+                dpName: hwAcCurJointApNum_hwAcCurJointApNum
+                format: '%5.0lf'
+                legend: Connected APs
+          Current Stations:
+            graphpoints:
+              hwAcCurAuthSucessStaNum:
+                dpName: hwAcCurAuthSucessStaNum_hwAcCurAuthSucessStaNum
+                format: '%5.0lf'
+                legend: Current Stations
+          Memory Utilization:
+            units: percent
+            graphpoints:
+              hwEntityMemUsage:
+                dpName: hwEntityMemUsage_hwEntityMemUsage
+                legend: Memory Utilization
+                includeThresholds: true
+
 class_relationships:
   - HuaweiControllerDevice 1:MC HuaweiAPRegion
   - HuaweiAPRegion 1:MC HuaweiAccessPoint
