@@ -1,7 +1,28 @@
 <?xml version="1.0"?>
 <objects>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6005') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6005' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd') -->
+<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd' module='Products.ZenModel.Manufacturer' class='Manufacturer'>
+<property type="string" id="url" mode="w" >
+http://www.huawei.com
+</property>
+<property type="string" id="zip" mode="w" >
+</property>
+<property type="lines" id="regexes" mode="w" >
+[]
+</property>
+<tomanycont id='products'>
+<object id='V200R005C10SPC300' module='Products.ZenModel.SoftwareClass' class='SoftwareClass'>
+<property type="string" id="name" mode="w" >
+V200R005C10SPC300
+</property>
+<property type="lines" id="productKeys" mode="w" >
+['V200R005C10SPC300']
+</property>
+<property type="boolean" id="isOS" mode="w" >
+True
+</property>
+</object>
+<object id='ac6005' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 ac6005
 </property>
@@ -12,8 +33,7 @@ ac6005
 False
 </property>
 </object>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6005-pwr') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6005-pwr' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<object id='ac6005-pwr' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 ac6005-pwr
 </property>
@@ -24,8 +44,7 @@ ac6005-pwr
 False
 </property>
 </object>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6605') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6605' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<object id='ac6605' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 ac6605
 </property>
@@ -36,8 +55,7 @@ ac6605
 False
 </property>
 </object>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6605-ac') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6605-ac' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<object id='ac6605-ac' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 ac6605-ac
 </property>
@@ -48,8 +66,7 @@ ac6605-ac
 False
 </property>
 </object>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'ac6605-lsw') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/ac6605-lsw' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<object id='ac6605-lsw' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 ac6605-lsw
 </property>
@@ -60,8 +77,7 @@ ac6605-lsw
 False
 </property>
 </object>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'acu') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/acu' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<object id='acu' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 acu
 </property>
@@ -72,8 +88,7 @@ acu
 False
 </property>
 </object>
-<!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd', 'products', 'acu2') -->
-<object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd/products/acu2' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
+<object id='acu2' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
 acu2
 </property>
@@ -83,5 +98,7 @@ acu2
 <property type="boolean" id="isOS" mode="w" >
 False
 </property>
+</object>
+</tomanycont>
 </object>
 </objects>
