@@ -68,8 +68,9 @@ class HuaweiAccessControllerMap(SnmpPlugin):
         log.info('processing %s for device %s', self.name(), device.id)
         
         maps = []
-        apmap = []
 	regionmap = []
+
+        regionnames = []
 
         getdata, tabledata = results;
   
@@ -84,7 +85,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
             if not name: 
                 log.warn('Skipping region with no name') 
                 continue 
-
+            regionnames.append(name)
             regionmap.append(ObjectMap({ 
                 'id': self.prepId(name), 
                 'title': name, 
@@ -96,38 +97,49 @@ class HuaweiAccessControllerMap(SnmpPlugin):
 
 
         # Access Point Component
-        for snmpindex, row in (acc_points.items()): 
+
+        for region in regionnames:
+            apmap = []
+            for snmpindex, row in (acc_points.items()): 
            
-            neighbour = ""
-            neighport = ""
+                neighbour = ""
+                neighport = ""
 
-            name = row.get('hwApSysName') 
-             
-            if not name: 
-                log.warn('Skipping access point with no name') 
-                continue 
+                name = row.get('hwApSysName')
+ 
+                regionrow = regions.get('.' + str(row.get('hwApUsedRegionIndex'))),       
+                apregion = regionrow[0].get('hwApRegionName'), 
+                
+                if not name: 
+                    log.warn('Skipping access point with no name') 
+                    continue 
 
-            apneighbour = lldp.get(snmpindex + '.200.1')
-            if apneighbour is not None:
-                neighbour = apneighbour.get('hwApLldpRemSysName'),
-                neighport = apneighbour.get('hwApLldpRemPortId'),
+                if region == apregion[0]:
+                    apneighbour = lldp.get(snmpindex + '.200.1')
+                    if apneighbour is not None:
+                        neighbour = apneighbour.get('hwApLldpRemSysName'),
+                        neighport = apneighbour.get('hwApLldpRemPortId'),
     
-            regionrow = regions.get('.' + str(row.get('hwApUsedRegionIndex'))),       
-            apmap.append(ObjectMap({ 
-                'id': self.prepId(name), 
-                'title': name, 
-                'snmpindex': snmpindex.strip('.'), 
-                'apip': row.get('hwApIpAddress'), 
-                'apmac': self.asmac(row.get('hwApMac')), 
-                'apserial': row.get('hwApSn'), 
-                'apmodel': row.get('hwApUsedType'), 
-                'apstatus': statusname.get(row.get('hwApRunState'), 'Unknown'), 
-                'apregion': regionrow[0].get('hwApRegionName'),
-                'apsoftwareversion': row.get('hwApSoftwareVersion'),
-                'apneighbourname' : neighbour,
-                'apneighbourport' : neighport,
-                })) 
+                    apmap.append(ObjectMap({ 
+                        'id': self.prepId(name), 
+                        'title': name, 
+                        'snmpindex': snmpindex.strip('.'), 
+                        'apip': row.get('hwApIpAddress'), 
+                        'apmac': self.asmac(row.get('hwApMac')), 
+                        'apserial': row.get('hwApSn'), 
+                        'apmodel': row.get('hwApUsedType'), 
+                        'apstatus': statusname.get(row.get('hwApRunState'), 'Unknown'), 
+                        'apregion': apregion,
+                        'apsoftwareversion': row.get('hwApSoftwareVersion'),
+                        'apneighbourname' : neighbour,
+                        'apneighbourport' : neighport,
+                        })) 
 
+            maps.append(RelationshipMap(
+                compname = 'huaweiAPRegions/%s' % region,
+                relname = 'huaweiAccessPoints',
+                modname = 'ZenPacks.community.HuaweiWireless.HuaweiAccessPoint',
+                objmaps = apmap))
 
         # Map main device details
         maps.append(ObjectMap(
@@ -144,12 +156,5 @@ class HuaweiAccessControllerMap(SnmpPlugin):
             modname = 'ZenPacks.community.HuaweiWireless.HuaweiAPRegion',
             objmaps = regionmap))
 
-        # Map AP compoenents and create relattionship to AP Regions
-        for ap in apmap:
-            maps.append(RelationshipMap(
-                compname = 'huaweiAPRegions/%s' % ap.apregion,
-                relname = 'huaweiAccessPoints',
-                modname = 'ZenPacks.community.HuaweiWireless.HuaweiAccessPoint',
-                objmaps = apmap))
 
         return maps
