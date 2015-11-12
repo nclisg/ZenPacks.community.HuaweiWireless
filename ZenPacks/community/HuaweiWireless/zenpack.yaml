@@ -52,8 +52,6 @@ classes:
     properties:
       regiondeploymode:
         label: Deploy Mode
-      regionapnumber:
-        label:  APs
 
 device_classes:
   /Network/Wireless/Access Controller/Huawei:
