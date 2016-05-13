@@ -65,33 +65,33 @@ class HuaweiAccessControllerMap(SnmpPlugin):
 
     def process(self, device, results, log):
         log.info('processing %s for device %s', self.name(), device.id)
-        
+
         maps = []
-	regionmap = []
+        regionmap = []
 
         regionnames = []
 
-        getdata, tabledata = results;
-  
-        acc_points = tabledata.get('hwApObjectsTable', {}) 
-        lldp = tabledata.get('hwApLldpTable', {}) 
+        getdata, tabledata = results
+ 
+        acc_points = tabledata.get('hwApObjectsTable', {})
+        lldp = tabledata.get('hwApLldpTable', {})
         regions = tabledata.get('hwApRegionTable', {})
-      
-        #  AP Region Component
-        for snmpindex, row in regions.items(): 
-            name = row.get('hwApRegionName') 
 
-            if not name: 
+        #  AP Region Component
+        for snmpindex, row in regions.items():
+            name = row.get('hwApRegionName')
+
+            if not name:
                 log.warn('Skipping region with no name') 
-                continue 
+                continue
             regionnames.append(name)
-            regionmap.append(ObjectMap({ 
-                'id': self.prepId(name), 
-                'title': name, 
-                'snmpindex': snmpindex.strip('.'), 
-                'regiondeploymode': deploymodes.get(row.get('hwApRegionDeployMode'), 'Unknown'), 
-                'regionapnumber': row.get('hwApRegionApNumber'), 
-                })) 
+            regionmap.append(ObjectMap({
+                'id': self.prepId(name),
+                'title': name,
+                'snmpindex': snmpindex.strip('.'),
+                'regiondeploymode': deploymodes.get(row.get('hwApRegionDeployMode'), 'Unknown'),
+                'regionapnumber': row.get('hwApRegionApNumber'),
+                }))
 
 
 
@@ -99,19 +99,19 @@ class HuaweiAccessControllerMap(SnmpPlugin):
 
         for region in regionnames:
             apmap = []
-            for snmpindex, row in (acc_points.items()): 
+            for snmpindex, row in (acc_points.items()):
            
                 neighbour = ""
                 neighport = ""
 
                 name = row.get('hwApSysName')
  
-                regionrow = regions.get('.' + str(row.get('hwApUsedRegionIndex'))),       
-                apregion = regionrow[0].get('hwApRegionName'), 
+                regionrow = regions.get('.' + str(row.get('hwApUsedRegionIndex'))),
+                apregion = regionrow[0].get('hwApRegionName'),
                 
-                if not name: 
-                    log.warn('Skipping access point with no name') 
-                    continue 
+                if not name:
+                    log.warn('Skipping access point with no name')
+                    continue
 
                 if region == apregion[0]:
                     apneighbour = lldp.get(snmpindex + '.200.1')
@@ -119,20 +119,20 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                         neighbour = apneighbour.get('hwApLldpRemSysName'),
                         neighport = apneighbour.get('hwApLldpRemPortId'),
     
-                    apmap.append(ObjectMap({ 
-                        'id': self.prepId(name), 
-                        'title': name, 
-                        'snmpindex': snmpindex.strip('.'), 
-                        'apip': row.get('hwApIpAddress'), 
-                        'apmac': self.asmac(row.get('hwApMac')), 
-                        'apserial': row.get('hwApSn'), 
-                        'apmodel': row.get('hwApUsedType'), 
-                        'apstatus': statusname.get(row.get('hwApRunState'), 'Unknown'), 
+                    apmap.append(ObjectMap({
+                        'id': self.prepId(name),
+                        'title': name,
+                        'snmpindex': snmpindex.strip('.'),
+                        'apip': row.get('hwApIpAddress'),
+                        'apmac': self.asmac(row.get('hwApMac')),
+                        'apserial': row.get('hwApSn'),
+                        'apmodel': row.get('hwApUsedType'),
+                        'apstatus': statusname.get(row.get('hwApRunState'), 'Unknown'),
                         'apregion': apregion,
                         'apsoftwareversion': row.get('hwApSoftwareVersion'),
                         'apneighbourname' : neighbour,
                         'apneighbourport' : neighport,
-                        })) 
+                        }))
 
             maps.append(RelationshipMap(
                 compnamp='huaweiAPRegions/%s' % region,
