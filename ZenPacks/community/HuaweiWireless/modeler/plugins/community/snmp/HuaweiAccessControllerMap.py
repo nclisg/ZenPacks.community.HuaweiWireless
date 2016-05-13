@@ -2,7 +2,7 @@ from Products.DataCollector.plugins.CollectorPlugin import (SnmpPlugin, GetTable
 from Products.DataCollector.plugins.DataMaps import ObjectMap, RelationshipMap, MultiArgs
 
 #Lookup table for AP Status
-statusname = {
+STATUSNAME = {
     1 : 'idle',
     2 : 'autofind',
     3 : 'typeNotMatch',
@@ -18,7 +18,7 @@ statusname = {
     }
 
 #Lookup table for AP Region Deploy modes
-deploymodes = {
+DEPLOYMODES = {
     1 : 'Discrete',
     2 : 'Normal',
     3 : 'Dense'
@@ -127,7 +127,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                         'apmac': self.asmac(row.get('hwApMac')),
                         'apserial': row.get('hwApSn'),
                         'apmodel': row.get('hwApUsedType'),
-                        'apstatus': statusname.get(row.get('hwApRunState'), 'Unknown'),
+                        'apstatus': STATUSNAME.get(row.get('hwApRunState'), 'Unknown'),
                         'apregion': apregion,
                         'apsoftwareversion': row.get('hwApSoftwareVersion'),
                         'apneighbourname' : neighbour,
