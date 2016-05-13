@@ -72,7 +72,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
         regionnames = []
 
         getdata, tabledata = results
- 
+
         acc_points = tabledata.get('hwApObjectsTable', {})
         lldp = tabledata.get('hwApLldpTable', {})
         regions = tabledata.get('hwApRegionTable', {})
@@ -82,7 +82,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
             name = row.get('hwApRegionName')
 
             if not name:
-                log.warn('Skipping region with no name') 
+                log.warn('Skipping region with no name')
                 continue
             regionnames.append(name)
             regionmap.append(ObjectMap({
@@ -99,16 +99,16 @@ class HuaweiAccessControllerMap(SnmpPlugin):
 
         for region in regionnames:
             apmap = []
-            for snmpindex, row in (acc_points.items()):
-           
+            for snmpindex, row in acc_points.items():
+
                 neighbour = ""
                 neighport = ""
 
                 name = row.get('hwApSysName')
- 
+
                 regionrow = regions.get('.' + str(row.get('hwApUsedRegionIndex'))),
                 apregion = regionrow[0].get('hwApRegionName'),
-                
+
                 if not name:
                     log.warn('Skipping access point with no name')
                     continue
@@ -118,7 +118,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                     if apneighbour is not None:
                         neighbour = apneighbour.get('hwApLldpRemSysName'),
                         neighport = apneighbour.get('hwApLldpRemPortId'),
-    
+
                     apmap.append(ObjectMap({
                         'id': self.prepId(name),
                         'title': name,
@@ -142,8 +142,8 @@ class HuaweiAccessControllerMap(SnmpPlugin):
 
         # Map main device details
         maps.append(ObjectMap(
-            modname = 'ZenPacks.community.HuaweiWireless.HuaweiControllerDevice',
-            data = {
+            modname='ZenPacks.community.HuaweiWireless.HuaweiControllerDevice',
+            data={
                 'setHWSerialNumber': getdata.get('entPhysicalSerialNum'),
                 'setOSProductKey': MultiArgs(getdata.get('entPhysicalSoftwareRev'), 'HUAWEI Technology Co.,Ltd'),
                 'controller_maxap': getdata.get('hwWlanAcAccessMaxApNumber'),
