@@ -43,7 +43,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 '.5':'hwApMac',
                 '.6':'hwApSn',
                 '.7':'hwApSysName',
-                '.8':'hwApRunState', 
+                '.8':'hwApRunState',
                 '.9':'hwApSoftwareVersion',
                 '.15':'hwApIpAddress',
                 '.20':'hwApRunTime',
@@ -58,13 +58,12 @@ class HuaweiAccessControllerMap(SnmpPlugin):
     )
 
     snmpGetMap = GetMap({
-            '.1.3.6.1.2.1.47.1.1.1.1.11.9':'entPhysicalSerialNum',
-            '.1.3.6.1.2.1.47.1.1.1.1.10.3':'entPhysicalSoftwareRev',
-            '.1.3.6.1.4.1.2011.6.139.1.2.5.0':'hwWlanAcAccessMaxApNumber',
+        '.1.3.6.1.2.1.47.1.1.1.1.11.9':'entPhysicalSerialNum',
+        '.1.3.6.1.2.1.47.1.1.1.1.10.3':'entPhysicalSoftwareRev',
+        '.1.3.6.1.4.1.2011.6.139.1.2.5.0':'hwWlanAcAccessMaxApNumber',
         })
 
-    def process(self, device, results, log): 
-
+    def process(self, device, results, log):
         log.info('processing %s for device %s', self.name(), device.id)
         
         maps = []
