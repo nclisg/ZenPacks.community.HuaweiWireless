@@ -89,7 +89,7 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 'id': self.prepId(name),
                 'title': name,
                 'snmpindex': snmpindex.strip('.'),
-                'regiondeploymode': deploymodes.get(row.get('hwApRegionDeployMode'), 'Unknown'),
+                'regiondeploymode': DEPLOYMODES.get(row.get('hwApRegionDeployMode'), 'Unknown'),
                 'regionapnumber': row.get('hwApRegionApNumber'),
                 }))
 
@@ -116,8 +116,8 @@ class HuaweiAccessControllerMap(SnmpPlugin):
                 if region == apregion[0]:
                     apneighbour = lldp.get(snmpindex + '.200.1')
                     if apneighbour is not None:
-                        neighbour = apneighbour.get('hwApLldpRemSysName'),
-                        neighport = apneighbour.get('hwApLldpRemPortId'),
+                        neighbour = apneighbour.get('hwApLldpRemSysName')
+                        neighport = apneighbour.get('hwApLldpRemPortId')
 
                     apmap.append(ObjectMap({
                         'id': self.prepId(name),
