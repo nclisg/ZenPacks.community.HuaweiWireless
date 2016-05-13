@@ -1,4 +1,4 @@
-from Products.DataCollector.plugins.CollectorPlugin import (SnmpPlugin, GetTableMap, GetMap) 
+from Products.DataCollector.plugins.CollectorPlugin import (SnmpPlugin, GetTableMap, GetMap)
 from Products.DataCollector.plugins.DataMaps import ObjectMap, RelationshipMap, MultiArgs
 
 #Lookup table for AP Status
@@ -7,13 +7,13 @@ statusname = {
     2 : 'autofind',
     3 : 'typeNotMatch',
     4 : 'fault',
-    5 : 'config', 
-    6 : 'configFailed', 
-    7 : 'download', 
-    8  : 'normal', 
-    9: 'commiting', 
-    10 : 'commitFailed', 
-    11 : 'standby', 
+    5 : 'config',
+    6 : 'configFailed',
+    7 : 'download',
+    8  : 'normal',
+    9: 'commiting',
+    10 : 'commitFailed',
+    11 : 'standby',
     12: 'vermismatch'
     }
 
@@ -24,30 +24,30 @@ deploymodes = {
     3 : 'Dense'
     }
 
-class HuaweiAccessControllerMap(SnmpPlugin): 
+class HuaweiAccessControllerMap(SnmpPlugin):
 
 #Pull SNMP data from controllers
 
     snmpGetTableMaps = (
-        GetTableMap( 
-            'hwApRegionTable', '1.3.6.1.4.1.2011.6.139.2.5.1.1', { 
-                '.2':'hwApRegionName', 
-                '.3':'hwApRegionDeployMode', 
-                '.4':'hwApRegionApNumber', 
-                } 
-            ),  
-        GetTableMap( 
-            'hwApObjectsTable', '1.3.6.1.4.1.2011.6.139.2.6.1.1', { 
-                '.2':'hwApUsedType', 
-                '.4':'hwApUsedRegionIndex', 
-                '.5':'hwApMac', 
-                '.6':'hwApSn', 
-                '.7':'hwApSysName', 
+        GetTableMap(
+            'hwApRegionTable', '1.3.6.1.4.1.2011.6.139.2.5.1.1', {
+                '.2':'hwApRegionName',
+                '.3':'hwApRegionDeployMode',
+                '.4':'hwApRegionApNumber',
+                }
+            ),
+        GetTableMap(
+            'hwApObjectsTable', '1.3.6.1.4.1.2011.6.139.2.6.1.1', {
+                '.2':'hwApUsedType',
+                '.4':'hwApUsedRegionIndex',
+                '.5':'hwApMac',
+                '.6':'hwApSn',
+                '.7':'hwApSysName',
                 '.8':'hwApRunState', 
-                '.9':'hwApSoftwareVersion', 
-                '.15':'hwApIpAddress', 
-                '.20':'hwApRunTime', 
-            } 
+                '.9':'hwApSoftwareVersion',
+                '.15':'hwApIpAddress',
+                '.20':'hwApRunTime',
+            }
         ),
         GetTableMap(
             'hwApLldpTable', '1.3.6.1.4.1.2011.6.139.2.6.14.1', {
