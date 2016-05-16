@@ -95,7 +95,7 @@ device_classes:
             type: SNMP
             datapoints:
               hwApOnlineUserNum: {}
-            oid: 1.3.6.i1.4.1.2011.6.139.2.6.6.1.5
+            oid: 1.3.6.1.4.1.2011.6.139.2.6.6.1.5
           hwApRunState:
             type: SNMP
             datapoints:
