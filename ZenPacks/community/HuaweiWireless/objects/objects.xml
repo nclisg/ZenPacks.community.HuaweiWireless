@@ -1,5 +1,24 @@
 <?xml version="1.0"?>
 <objects>
+<!-- ('', 'zport', 'dmd', 'Events', 'Wireless') -->
+<object id='/zport/dmd/Events/Wireless' module='Products.ZenEvents.EventClass' class='EventClass'>
+<object id='AP' module='Products.ZenEvents.EventClass' class='EventClass'>
+<property type="text" id="transform" mode="w" >
+STATUSNAME = {1 : 'idle', 2 : 'autofind', 3 : 'typeNotMatch', 4 : 'fault', 5 : 'config', 6 : 'configFailed', 7 : 'download', 8  : 'normal', 9: 'commiting', 10 : 'commitFailed', 11 : 'standby', 12: 'vermismatch'}
+
+state = STATUSNAME[int(evt.current.split('.')[0])]
+
+evt.summary = 'AP state is ' + state
+evt.message = evt.summary
+
+for c in device.getDeviceComponents():
+    if c.id == evt.component:
+        c.apstatus = state
+
+txnCommit()
+</property>
+</object>
+</object>
 <!-- ('', 'zport', 'dmd', 'Manufacturers', 'HUAWEI Technology Co.,Ltd') -->
 <object id='/zport/dmd/Manufacturers/HUAWEI Technology Co.,Ltd' module='Products.ZenModel.Manufacturer' class='Manufacturer'>
 <property type="string" id="url" mode="w" >
@@ -21,6 +40,9 @@ V200R005C10SPC300
 <property type="boolean" id="isOS" mode="w" >
 True
 </property>
+<tomany id='instances'>
+<link objid='/zport/dmd/Devices/Network/Wireless/Access Controller/Huawei/devices/clt-wc-001/os'/>
+</tomany>
 </object>
 <object id='ac6005' module='Products.ZenModel.HardwareClass' class='HardwareClass'>
 <property type="string" id="name" mode="w" >
@@ -98,6 +120,9 @@ acu2
 <property type="boolean" id="isOS" mode="w" >
 False
 </property>
+<tomany id='instances'>
+<link objid='/zport/dmd/Devices/Network/Wireless/Access Controller/Huawei/devices/clt-wc-001/hw'/>
+</tomany>
 </object>
 </tomanycont>
 </object>

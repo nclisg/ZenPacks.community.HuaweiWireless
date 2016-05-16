@@ -73,6 +73,13 @@ device_classes:
       HuaweiAccessPoint:
         description: Monitoring Metrics of Access Point components
         targetPythonClass: Products.ZenModel.Device
+        thresholds:
+          AP State:
+            dsnames: [hwApRunState_hwApRunState]
+            eventClass: /Wireless/AP
+            severity: err
+            minval: '8'
+            maxval: '8'
         datasources:
           hwApCpuUseRate:
             type: SNMP
@@ -88,7 +95,12 @@ device_classes:
             type: SNMP
             datapoints:
               hwApOnlineUserNum: {}
-            oid: 1.3.6.1.4.1.2011.6.139.2.6.6.1.5
+            oid: 1.3.6.i1.4.1.2011.6.139.2.6.6.1.5
+          hwApRunState:
+            type: SNMP
+            datapoints:
+              hwApRunState: GAUGE
+            oid: 1.3.6.1.4.1.2011.6.139.2.6.1.1.8
         graphs:
           CPU Utilization:
             units: percent
