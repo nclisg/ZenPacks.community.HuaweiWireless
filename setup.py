@@ -3,7 +3,7 @@
 # or saved.  Do not modify them directly here.
 # NB: PACKAGES is deprecated 
 NAME = "ZenPacks.community.HuaweiWireless"
-VERSION = "1.5.1-beta"
+VERSION = "1.5.3-beta"
 AUTHOR = "Nick Muir"
 LICENSE = "LGPL"
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
